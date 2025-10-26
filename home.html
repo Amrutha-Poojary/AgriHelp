@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriHelp - Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        header {
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-buttons {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .login-btn {
+            background: white;
+            color: #2e7d32;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #e0e7ff;
+        }
+
+        .lang-dropdown {
+            position: relative;
+        }
+
+        .lang-btn {
+            background: white;
+            color: #2e7d32;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .lang-btn:hover {
+            background: #e0e7ff;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-radius: 6px;
+            z-index: 1;
+        }
+
+        .dropdown-content button {
+            width: 100%;
+            padding: 8px 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: left;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #e0e7ff;
+        }
+
+        .lang-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        main {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .vision-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 700px;
+            margin: 30px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .vision-section h2 {
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+
+        .vision-section p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            width: 280px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: #555;
+        }
+
+        footer {
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-buttons">
+            <div class="lang-dropdown">
+                <button class="lang-btn">🌐 Language</button>
+                <div class="dropdown-content">
+                    <button onclick="setLanguage('en')">English</button>
+                    <button onclick="setLanguage('kn')">ಕನ್ನಡ</button>
+                </div>
+            </div>
+            <a href="login.html" class="login-btn" id="login-text">Login</a>
+        </div>
+        <h1 id="title">Welcome to AgriHelp</h1>
+        <p id="subtitle">Empowering farmers with smart, data-driven agriculture solutions</p>
+    </header>
+
+    <main>
+        <section class="vision-section">
+            <h2 id="vision-heading">Our Vision</h2>
+            <p id="vision-text">
+                To revolutionize agriculture through technology, providing farmers with intelligent tools, real-time insights, and sustainable solutions to improve productivity, profitability, and environmental balance.
+            </p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3 id="feature1-title">Weather Forecast</h3>
+                <p id="feature1-text">Get accurate, location-based weather updates to plan your farming activities effectively.</p>
+            </div>
+            <div class="feature-card">
+                <h3 id="feature2-title">Crop Recommendation</h3>
+                <p id="feature2-text">Receive personalized crop suggestions based on soil and weather data for better yield.</p>
+            </div>
+            <div class="feature-card">
+                <h3 id="feature3-title">Government Alerts</h3>
+                <p id="feature3-text">Stay informed about the latest agricultural schemes, subsidies, and support programs.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-text">© 2025 AgriHelp. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // English and Kannada text mapping
+        const translations = {
+            en: {
+                title: "Welcome to AgriHelp",
+                subtitle: "Empowering farmers with smart, data-driven agriculture solutions",
+                visionHeading: "Our Vision",
+                visionText: "To revolutionize agriculture through technology, providing farmers with intelligent tools, real-time insights, and sustainable solutions to improve productivity, profitability, and environmental balance.",
+                feature1Title: "Weather Forecast",
+                feature1Text: "Get accurate, location-based weather updates to plan your farming activities effectively.",
+                feature2Title: "Crop Recommendation",
+                feature2Text: "Receive personalized crop suggestions based on soil and weather data for better yield.",
+                feature3Title: "Government Alerts",
+                feature3Text: "Stay informed about the latest agricultural schemes, subsidies, and support programs.",
+                loginText: "Login",
+                footerText: "© 2025 AgriHelp. All rights reserved."
+            },
+            kn: {
+                title: "ಅಗ್ರೀಹೆಲ್ಪ್‌ಗೆ ಸುಸ್ವಾಗತ",
+                subtitle: "ಸ್ಮಾರ್ಟ್, ಡೇಟಾ ಆಧಾರಿತ ಕೃಷಿ ಪರಿಹಾರಗಳೊಂದಿಗೆ ರೈತರ ಸಬಲೀಕರಣ",
+                visionHeading: "ನಮ್ಮ ದೃಷ್ಟಿಕೋನ",
+                visionText: "ತಂತ್ರಜ್ಞಾನದಿಂದ ಕೃಷಿಯಲ್ಲಿ ಕ್ರಾಂತಿ ತರಲು, ರೈತರಿಗೆ ಬುದ್ಧಿವಂತ ಉಪಕರಣಗಳು, ನೈಜ ಸಮಯದ ಒಳನೋಟಗಳು ಮತ್ತು ಸ್ಥಿರ ಪರಿಹಾರಗಳನ್ನು ಒದಗಿಸುವುದು, ಉತ್ಪಾದಕತೆ ಮತ್ತು ಲಾಭದಾಯಕತೆಯನ್ನು ಹೆಚ್ಚಿಸಲು.",
+                feature1Title: "ಹವಾಮಾನ ಮುನ್ಸೂಚನೆ",
+                feature1Text: "ನಿಮ್ಮ ಸ್ಥಳಾಧಾರಿತ ಹವಾಮಾನ ನವೀಕರಣಗಳನ್ನು ಪಡೆಯಿರಿ ಮತ್ತು ಕೃಷಿ ಚಟುವಟಿಕೆಗಳನ್ನು ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಯೋಜಿಸಿ.",
+                feature2Title: "ಬೆಳೆ ಶಿಫಾರಸು",
+                feature2Text: "ಮಣ್ಣಿನ ಮತ್ತು ಹವಾಮಾನದ ಡೇಟಾದ ಆಧಾರದ ಮೇಲೆ ಉತ್ತಮ ಉತ್ಪಾದನೆಗಾಗಿ ವೈಯಕ್ತಿಕ ಬೆಳೆ ಶಿಫಾರಸುಗಳನ್ನು ಪಡೆಯಿರಿ.",
+                feature3Title: "ಸರ್ಕಾರಿ ಪ್ರಕಟಣೆಗಳು",
+                feature3Text: "ಇತ್ತೀಚಿನ ಕೃಷಿ ಯೋಜನೆಗಳು, ಸಹಾಯಧನಗಳು ಮತ್ತು ಬೆಂಬಲ ಕಾರ್ಯಕ್ರಮಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿ ಹೊಂದಿರಿ.",
+                loginText: "ಲಾಗಿನ್",
+                footerText: "© 2025 ಅಗ್ರೀಹೆಲ್ಪ್. ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ."
+            }
+        };
+
+        function setLanguage(lang) {
+            localStorage.setItem("selectedLang", lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById("title").textContent = t.title;
+            document.getElementById("subtitle").textContent = t.subtitle;
+            document.getElementById("vision-heading").textContent = t.visionHeading;
+            document.getElementById("vision-text").textContent = t.visionText;
+            document.getElementById("feature1-title").textContent = t.feature1Title;
+            document.getElementById("feature1-text").textContent = t.feature1Text;
+            document.getElementById("feature2-title").textContent = t.feature2Title;
+            document.getElementById("feature2-text").textContent = t.feature2Text;
+            document.getElementById("feature3-title").textContent = t.feature3Title;
+            document.getElementById("feature3-text").textContent = t.feature3Text;
+            document.getElementById("login-text").textContent = t.loginText;
+            document.getElementById("footer-text").textContent = t.footerText;
+        }
+
+        // Remember user's language choice
+        window.onload = () => {
+            const savedLang = localStorage.getItem("selectedLang") || "en";
+            applyLanguage(savedLang);
+        };
+    </script>
+</body>
+</html>

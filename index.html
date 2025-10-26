@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriHelp - Farmer Support</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+/* Body & Background */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin:0;
+    padding:0;
+    background: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+
+/* Overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.4);
+    z-index: -1;
+}
+
+/* Header */
+header {
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+header h1 { margin:0; font-size:2em; }
+header p { margin:5px 0 0 0; font-size:1em; }
+#user-profile { position:absolute; top:20px; right:20px; text-align:right; }
+
+/* Language buttons container */
+.lang-container {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+}
+.lang-container button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: white;
+    color: #2e7d32;
+    transition: 0.3s;
+}
+.lang-container button:hover { background: #e0e7ff; }
+
+/* Main */
+main {
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* Sections */
+section {
+    width:100%;
+    max-width:900px;
+    margin:20px 0;
+}
+
+/* Buttons for Navigation */
+section:first-of-type button {
+    padding:10px 20px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#4CAF50;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+section:first-of-type button:hover {
+    background:#388E3C;
+}
+
+/* Containers */
+.weather-container, .crop-container, .alerts-container {
+    background: rgba(255,255,255,0.95);
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    margin-top:10px;
+}
+
+/* Inputs & Buttons */
+input {
+    padding:10px;
+    margin:5px 0;
+    width:100%;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+button {
+    padding:10px 20px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#4CAF50;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover {
+    background:#388E3C;
+}
+
+/* Cards */
+.weather-card, .crop-card {
+    margin-top:10px;
+    padding:10px;
+    border-radius:10px;
+    background:#e5e7eb;
+}
+
+/* Footer */
+footer {
+    text-align:center;
+    padding:20px;
+    background: rgba(255,255,255,0.95);
+    color:#2e7d32;
+    font-weight:500;
+    border-top:1px solid #ccc;
+    border-radius:10px 10px 0 0;
+}
+
+/* Responsive */
+@media(max-width:600px){
+    header h1 { font-size:1.5em; }
+    section:first-of-type button { padding:8px 15px; font-size:0.9em; }
+}
+</style>
+</head>
+<body>
+<header>
+    <div class="lang-container">
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('kn')">ಕನ್ನಡ</button>
+    </div>
+    <h1 data-key="headerTitle">Welcome to AgriHelp</h1>
+    <p data-key="headerSubtitle">Your one-stop support for weather, crops, and government schemes!</p>
+    <div id="user-profile"></div>
+</header>
+
+<main>
+    <!-- Navigation Buttons -->
+    <section>
+        <button onclick="scrollToSection('weather-section')" data-key="btnWeather">Weather Forecast</button>
+        <button onclick="scrollToSection('crop-section')" data-key="btnCrop">Crop Recommendation</button>
+        <button onclick="scrollToSection('alerts-section')" data-key="btnAlerts">Government Alerts</button>
+    </section>
+
+    <!-- Weather Section -->
+    <section id="weather-section">
+        <div class="weather-container">
+            <h2 data-key="weatherTitle">Weather Forecast</h2>
+            <input type="text" id="city" placeholder="Enter your city" data-key-placeholder="inputCity">
+            <button onclick="getWeather()" data-key="btnGetWeather">Get Weather</button>
+            <div id="weather-result" class="weather-card"></div>
+        </div>
+    </section>
+
+    <!-- Crop Recommendation Section -->
+    <section id="crop-section">
+        <div class="crop-container">
+            <h2 data-key="cropTitle">Crop Recommendation</h2>
+            <input type="number" id="N" placeholder="Nitrogen (N)" data-key-placeholder="inputN">
+            <input type="number" id="P" placeholder="Phosphorus (P)" data-key-placeholder="inputP">
+            <input type="number" id="K" placeholder="Potassium (K)" data-key-placeholder="inputK">
+            <input type="number" id="temperature" placeholder="Temperature (°C)" data-key-placeholder="inputTemp">
+            <input type="number" id="humidity" placeholder="Humidity (%)" data-key-placeholder="inputHumidity">
+            <input type="number" id="ph" placeholder="Soil pH" data-key-placeholder="inputPH">
+            <input type="number" id="rainfall" placeholder="Rainfall (mm)" data-key-placeholder="inputRainfall">
+            <button onclick="getCropRecommendation()" data-key="btnGetCrop">Get Recommendation</button>
+            <div id="crop-result" class="crop-card"></div>
+        </div>
+    </section>
+
+    <!-- Government Alerts Section -->
+    <section id="alerts-section">
+        <div class="alerts-container">
+            <h2 data-key="alertsTitle">Government Alerts</h2>
+            <div id="alerts-list"></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p data-key="footerText">© 2025 AgriHelp. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+// ------------------- LANGUAGE TRANSLATION -------------------
+const translations = {
+    kn: {
+        headerTitle: "ಅಗ್ರಿಹೆಲ್ಪ್‌ಗೆ ಸ್ವಾಗತ",
+        headerSubtitle: "ಹವಾಮಾನ, ಬೆಳೆಗಳು ಮತ್ತು ಸರ್ಕಾರಿ ಯೋಜನೆಗಳಿಗೆ ನಿಮ್ಮ ಒಡೆತನದ ಬೆಂಬಲ!",
+        btnWeather: "ಹವಾಮಾನ ಊಹೆ",
+        btnCrop: "ಬೆಳೆ ಶಿಫಾರಸು",
+        btnAlerts: "ಸರ್ಕಾರಿ ಜಾಗೃತಿ",
+        weatherTitle: "ಹವಾಮಾನ ಊಹೆ",
+        inputCity: "ನಿಮ್ಮ ನಗರವನ್ನು ನಮೂದಿಸಿ",
+        btnGetWeather: "ಹವಾಮಾನ ಪಡೆಯಿ",
+        cropTitle: "ಬೆಳೆ ಶಿಫಾರಸು",
+        inputN: "ನೈಟ್ರೋಜನ್ (N)",
+        inputP: "ಫಾಸ್ಫೋರಸ್ (P)",
+        inputK: "ಪೋಟ್ಯಾಸಿಯಮ್ (K)",
+        inputTemp: "ತಾಪಮಾನ (°C)",
+        inputHumidity: "ಆರ್ಜಿನ ( % )",
+        inputPH: "ಮಣ್ಣು pH",
+        inputRainfall: "ವರ್ಷಾಚನೆ (ಮಿಮೀ)",
+        btnGetCrop: "ಶಿಫಾರಸು ಪಡೆಯಿ",
+        alertsTitle: "ಸರ್ಕಾರಿ ಜಾಗೃತಿ",
+        footerText: "© 2025 ಅಗ್ರಿಹೆಲ್ಪ್. ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ."
+    },
+    en: {} // default English, no translation needed
+};
+
+function setLanguage(lang) {
+    document.querySelectorAll("[data-key]").forEach(el => {
+        const key = el.getAttribute("data-key");
+        if(translations[lang] && translations[lang][key]) {
+            el.innerText = translations[lang][key];
+        }
+    });
+    document.querySelectorAll("[data-key-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-key-placeholder");
+        if(translations[lang] && translations[lang][key]) {
+            el.placeholder = translations[lang][key];
+        }
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80') 
+        no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+}
+
+/* Header */
+header {
+    padding: 50px 20px;
+    background: rgba(0, 128, 0, 0.7);
+}
+
+main {
+    padding: 40px 20px;
+}
+
+/* Buttons */
+button {
+    margin: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Section Containers - Transparent panels */
+#weather-section,
+#crop-section,
+#alerts-section {
+    margin-top: 50px;
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Weather Section */
+.weather-container {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.weather-container input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+}
+
+.weather-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #FFA500;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.weather-container button:hover {
+    background-color: #FF8C00;
+}
+
+.weather-card {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.weather-card img {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+}
+
+/* Crop Section */
+.crop-container {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.crop-container input {
+    width: 80%;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+.crop-container button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #FFA500;
+    color: white;
+    cursor: pointer;
+}
+
+.crop-container button:hover {
+    background-color: #FF8C00;
+}
+
+.crop-card {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+/* Government Alerts Section */
+.alerts-container {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    color: #fff;
+    text-align: left;
+}
+
+.alert-card {
+    background: rgba(255,255,255,0.1);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.alert-card a {
+    color: #FFA500;
+    text-decoration: none;
+}
+
+.alert-card a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    background: rgba(0,0,0,0.7);
+}
